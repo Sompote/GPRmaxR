@@ -240,3 +240,41 @@ After the simulation completes, merge the individual output files into a single 
     (gprMax)$ python -m tools.plot_Bscan user_models2/sand_with_hole_Bscan_merged.out Ez
 
 The resulting B-scan plot, showing the hyperbolic reflection from the cylinder, will be saved as a PNG image in the ``user_models2`` directory.
+
+Plotting Results
+================
+
+gprMax includes several tools in the ``tools`` package to help you view your simulation results.
+
+Plotting a B-scan
+-----------------
+
+To plot a B-scan (a cross-section of the ground), you typically need to merge the individual A-scan output files first (if you ran a series of models), and then use the ``plot_Bscan.py`` tool.
+
+1. **Merge Output Files** (if applicable):
+
+   .. code-block:: bash
+
+       (gprMax)$ python -m tools.outputfiles_merge user_models2/your_model_name
+
+   This creates a ``your_model_name_merged.out`` file.
+
+2. **Plot the B-scan**:
+
+   .. code-block:: bash
+
+       (gprMax)$ python -m tools.plot_Bscan user_models2/your_model_name_merged.out Ez
+
+   * ``Ez`` specifies the electric field component to plot (e.g., Ex, Ey, Ez).
+   * The script has been configured to save the plot as a PNG image in the same directory as the output file (e.g., ``user_models2/your_model_name_merged.png``).
+
+Plotting an A-scan
+------------------
+
+To plot a single A-scan (one trace):
+
+.. code-block:: bash
+
+    (gprMax)$ python -m tools.plot_Ascan user_models/cylinder_Ascan_2D.out
+
+This is useful for inspecting the signal from a single simulation run.
