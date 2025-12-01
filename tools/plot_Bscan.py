@@ -66,16 +66,20 @@ def mpl_plot(filename, outputdata, dt, rxnumber, rxcomponent):
         cb.set_label('Current [A]')
 
     # Save a PDF/PNG of the figure
-    # savefile = os.path.splitext(filename)[0]
+    savefile = os.path.splitext(filename)[0]
+    savepath = path + os.sep + savefile + '.png'
+    print(f"Saving plot to: {savepath}", flush=True)
     # fig.savefig(path + os.sep + savefile + '.pdf', dpi=None, format='pdf', 
     #             bbox_inches='tight', pad_inches=0.1)
-    # fig.savefig(path + os.sep + savefile + '.png', dpi=150, format='png', 
-    #             bbox_inches='tight', pad_inches=0.1)
+    fig.savefig(savepath, dpi=150, format='png', 
+                bbox_inches='tight', pad_inches=0.1)
 
     return plt
 
 
 if __name__ == "__main__":
+
+    print("--- Starting plot_Bscan.py ---", flush=True)
 
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Plots a B-scan image.', 
@@ -94,8 +98,12 @@ if __name__ == "__main__":
     if nrx == 0:
         raise CmdInputError('No receivers found in {}'.format(args.outputfile))
 
-    for rx in range(1, nrx + 1):
+    # for rx in range(1, nrx + 1):
+    rx = 1
+    try:
         outputdata, dt = get_output_data(args.outputfile, rx, args.rx_component)
         plthandle = mpl_plot(args.outputfile, outputdata, dt, rx, args.rx_component)
+    except Exception as e:
+        print(f"An error occurred: {e}", flush=True)
 
-    plthandle.show()
+    # plthandle.show()

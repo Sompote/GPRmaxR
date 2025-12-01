@@ -1,16 +1,17 @@
-#title: B-scan of sand profile with buried air hole (optimized)
+#title: B-scan of sand profile with buried air cylinder
 #domain: 10 10 4
 #dx_dy_dz: 0.05 0.05 0.05
-#time_window: 50e-9
+#time_window: 60e-9
 
 #material: 6 0 1 0 sand
 #material: 1 0 1 0 air
 
 #waveform: ricker 1 100e6 my_ricker
-#hertzian_dipole: z 3.5 5 3.5 my_ricker
-#rx: 4 5 3.5
+
+#hertzian_dipole: z 3.0 5 3.5 my_ricker
+#rx: 3.5 5 3.5
 #src_steps: 0.1 0 0
 #rx_steps: 0.1 0 0
 
 #box: 0 0 0 10 10 3 sand
-#box: 4.5 4.5 0 5.5 5.5 3 air
+#cylinder: 5 0 2.5 5 10 2.5 0.1 air

@@ -214,3 +214,29 @@ Thanks To Our Contributors ✨🔗
 ==========================
 .. image:: https://contrib.rocks/image?repo=gprMax/gprMax
    :target: https://github.com/gprMax/gprMax/graphs/contributors
+
+GPU Usage & Example
+===================
+
+To use the GPU solver, you must have a CUDA-enabled NVIDIA GPU and the ``pycuda`` package installed. If you haven't installed it yet:
+
+.. code-block:: bash
+
+    (gprMax)$ pip install pycuda
+
+Then, you can run simulations using the ``-gpu`` flag. For example, to run the "sand with buried cylinder" B-scan model (which produces a characteristic hyperbolic reflection):
+
+.. code-block:: bash
+
+    (gprMax)$ python -m gprMax user_models2/sand_with_hole_Bscan.in -n 40 -gpu 0
+
+This command runs 40 traces (A-scans) to create a B-scan, using GPU device 0.
+
+After the simulation completes, merge the individual output files into a single file and plot the result:
+
+.. code-block:: bash
+
+    (gprMax)$ python -m tools.outputfiles_merge user_models2/sand_with_hole_Bscan
+    (gprMax)$ python -m tools.plot_Bscan user_models2/sand_with_hole_Bscan_merged.out Ez
+
+The resulting B-scan plot, showing the hyperbolic reflection from the cylinder, will be saved as a PNG image in the ``user_models2`` directory.

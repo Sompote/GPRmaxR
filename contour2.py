@@ -47,14 +47,13 @@ def create_contour_plot(filename, field="E-field", isosurfaces=10, cmap="viridis
     contours = grid.contour(isosurfaces=isosurfaces, scalars=scalar_field)
 
     # Create a plotter object and add the contours
-    plotter = pv.Plotter()
+    plotter = pv.Plotter(off_screen=True)
     plotter.add_mesh(contours, cmap=cmap)
     plotter.add_mesh(grid.outline(), color="k")
     plotter.show_grid()
 
-    # Show the plot
-    print(f"Displaying contour plot for {scalar_field}. Close the plot window to exit.")
-    plotter.show()
+    print(f"Saving contour plot for {scalar_field} to contour_plot.png")
+    plotter.screenshot("contour_plot.png")
 
 
 if __name__ == "__main__":
